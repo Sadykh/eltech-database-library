@@ -1,5 +1,6 @@
 <?php
 
+use common\helpers\AuthorHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -23,14 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'firstName',
             'lastName',
             'middleName',
-            'user_id',
-            //'status_id',
+            [
+                'attribute' => 'status_id',
+                'content' => function ($model) {
+                    $statusList = AuthorHelper::getStatusList();
+                    return $statusList[$model->status_id];
+                }
+            ],
             //'created_at',
             //'updated_at',
 
