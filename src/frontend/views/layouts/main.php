@@ -39,6 +39,7 @@ AppAsset::register($this);
         ['label' => 'Главная', 'url' => ['/site/index']],
         ['label' => 'Авторы', 'url' => ['/author']],
         ['label' => 'Журналы', 'url' => ['/journal']],
+        ['label' => 'Публикации', 'url' => ['/publication']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
