@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'language_id') ?>
 
-    <?= $form->field($model, 'year_from') ?>
+    <?= $form->field($model, 'year') ?>
 
     <?php // echo $form->field($model, 'year_to') ?>
 

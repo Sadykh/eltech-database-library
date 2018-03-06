@@ -46,8 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $statusList[$model->journal_id];
                 }
             ],
-            'year_from',
-            //'year_to',
+            'year',
             //'journal_id',
             //'scopus_id',
             //'scopus_number',

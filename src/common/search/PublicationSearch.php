@@ -18,7 +18,7 @@ class PublicationSearch extends Publication
     public function rules()
     {
         return [
-            [['id', 'user_id', 'author_id', 'language_id', 'year_from', 'year_to', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'user_id', 'author_id', 'language_id', 'year', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
             [['scopus_number', 'doi_number', 'isbn'], 'safe'],
         ];
     }
@@ -63,8 +63,7 @@ class PublicationSearch extends Publication
             'user_id' => $this->user_id,
             'author_id' => $this->author_id,
             'language_id' => $this->language_id,
-            'year_from' => $this->year_from,
-            'year_to' => $this->year_to,
+            'year' => $this->year,
             'journal_id' => $this->journal_id,
             'scopus_id' => $this->scopus_id,
             'wos_id' => $this->wos_id,

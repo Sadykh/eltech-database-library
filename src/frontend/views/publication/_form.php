@@ -15,10 +15,7 @@ use common\helpers\PublicationHelper;
 
     <div class="row">
         <div class="col-md-3">
-            <?= $form->field($model, 'year_from')->dropDownList(PublicationHelper::getAgeList()) ?>
-        </div>
-        <div class="col-md-3">
-            <?= $form->field($model, 'year_to')->dropDownList(PublicationHelper::getAgeList()) ?>
+            <?= $form->field($model, 'year')->dropDownList(PublicationHelper::getAgeList()) ?>
         </div>
     </div>
     <div class="row">

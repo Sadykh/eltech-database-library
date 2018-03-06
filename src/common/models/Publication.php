@@ -12,8 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $user_id
  * @property int $author_id
  * @property int $language_id
- * @property int $year_from
- * @property int $year_to
+ * @property int $year
  * @property int $journal_id
  * @property int $scopus_id
  * @property string $scopus_number
@@ -50,7 +49,7 @@ class Publication extends \yii\db\ActiveRecord
     {
         return [
             [['author_id', 'language_id', 'journal_id',], 'required'],
-            [['user_id', 'author_id', 'language_id', 'year_from', 'year_to', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'author_id', 'language_id', 'year', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
             [['scopus_number', 'doi_number', 'isbn'], 'string', 'max' => 191],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['journal_id'], 'exist', 'skipOnError' => true, 'targetClass' => Journal::className(), 'targetAttribute' => ['journal_id' => 'id']],
@@ -75,14 +74,13 @@ class Publication extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'author_id' => 'Author ID',
             'language_id' => 'Language ID',
-            'year_from' => 'Year From',
-            'year_to' => 'Year To',
+            'year' => 'Year',
             'journal_id' => 'Journal ID',
             'scopus_id' => 'Scopus ID',
             'scopus_number' => 'Scopus Number',
-            'doi_number' => 'Doi Number',
+            'doi_number' => 'DOI Number',
             'wos_id' => 'Wos ID',
-            'rinch_id' => 'Rinch ID',
+            'rinch_id' => 'РИНЦ',
             'peer_reviewed_id' => 'Peer Reviewed ID',
             'conference_id' => 'Conference ID',
             'isbn' => 'Isbn',
