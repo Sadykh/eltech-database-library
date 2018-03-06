@@ -15,6 +15,9 @@ use common\helpers\PublicationHelper;
 
     <div class="row">
         <div class="col-md-3">
+            <?= $form->field($model, 'title')->textInput() ?>
+        </div>
+        <div class="col-md-3">
             <?= $form->field($model, 'year')->dropDownList(PublicationHelper::getAgeList()) ?>
         </div>
     </div>

@@ -24,6 +24,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $isbn
  * @property int $created_at
  * @property int $updated_at
+ * @property string $title
  *
  * @property Author $author
  * @property Journal $journal
@@ -50,7 +51,7 @@ class Publication extends \yii\db\ActiveRecord
         return [
             [['author_id', 'language_id', 'journal_id',], 'required'],
             [['user_id', 'author_id', 'language_id', 'year', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
-            [['scopus_number', 'doi_number', 'isbn'], 'string', 'max' => 191],
+            [['scopus_number', 'doi_number', 'isbn', 'title'], 'string', 'max' => 191],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['journal_id'], 'exist', 'skipOnError' => true, 'targetClass' => Journal::className(), 'targetAttribute' => ['journal_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -74,7 +75,6 @@ class Publication extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'author_id' => 'Author ID',
             'language_id' => 'Language ID',
-            'year' => 'Year',
             'journal_id' => 'Journal ID',
             'scopus_id' => 'Scopus ID',
             'scopus_number' => 'Scopus Number',
@@ -86,6 +86,8 @@ class Publication extends \yii\db\ActiveRecord
             'isbn' => 'Isbn',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'year' => 'Year',
+            'title' => 'Title',
         ];
     }
 

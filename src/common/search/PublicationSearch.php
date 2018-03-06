@@ -18,6 +18,7 @@ class PublicationSearch extends Publication
     public function rules()
     {
         return [
+            [['title'], 'string'],
             [['id', 'user_id', 'author_id', 'language_id', 'year', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
             [['scopus_number', 'doi_number', 'isbn'], 'safe'],
         ];
@@ -76,7 +77,8 @@ class PublicationSearch extends Publication
 
         $query->andFilterWhere(['like', 'scopus_number', $this->scopus_number])
             ->andFilterWhere(['like', 'doi_number', $this->doi_number])
-            ->andFilterWhere(['like', 'isbn', $this->isbn]);
+            ->andFilterWhere(['like', 'isbn', $this->isbn])
+            ->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }
