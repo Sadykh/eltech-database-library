@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Author */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Authors', 'url' => ['index']];
+$this->title = $model->firstName . ' ' . $model->lastName;
+$this->params['breadcrumbs'][] = ['label' => 'Авторы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="author-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены, что хотите удалить данного автора?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -32,10 +32,33 @@ $this->params['breadcrumbs'][] = $this->title;
             'firstName',
             'lastName',
             'middleName',
-            'user_id',
-            'status_id',
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'user_id',
+                'value' => function ($model) {
+                    return $model->user->username;
+                }
+            ],
+            [
+                'attribute' => 'status_id',
+                'value' => function ($model) {
+                    $statusList = \common\helpers\AuthorHelper::getStatusList();
+                    return $statusList[$model->status_id];
+                }
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return date('d.m.Y в h:i', $model->created_at);
+                }
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return date('d.m.Y в h:i', $model->created_at);
+                }
+            ],
         ],
     ]) ?>
 

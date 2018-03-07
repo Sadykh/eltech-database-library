@@ -20,6 +20,11 @@ use common\helpers\AuthorHelper;
         <div class="col-md-4">
             <?= $form->field($model, 'lastName')->textInput(['maxlength' => true]) ?>
         </div>
+        <div class="col-md-4">
+            <div class="alert alert-info" role="alert">
+                Данные поля обязательны для заполнения. Пожалуйста, заполняйте на русском языке.
+            </div>
+        </div>
 
     </div>
 
@@ -30,11 +35,17 @@ use common\helpers\AuthorHelper;
         <div class="col-md-4">
             <?= $form->field($model, 'status_id')->dropDownList(AuthorHelper::getStatusList()) ?>
         </div>
+        <div class="col-md-4">
+            <div class="alert alert-info" role="alert">
+                <p>Поле <b>Отчество</b> заполняется при его наличии.</p>
+                <p>Поле <b>Статус</b> влияет на наличие автора в списке при добавлении публикации.</p>
+            </div>
+        </div>
     </div>
 
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

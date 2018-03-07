@@ -62,10 +62,10 @@ class Author extends \yii\db\ActiveRecord
             'firstName' => 'Имя',
             'lastName' => 'Фамилия',
             'middleName' => 'Отчество',
-            'user_id' => 'User ID',
+            'user_id' => 'Добавил',
             'status_id' => 'Статус',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Дата добавления',
+            'updated_at' => 'Дата обновления',
         ];
     }
 
