@@ -2,50 +2,52 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'Главная страница';
 ?>
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
+        <h1>Здравствуйте!</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+        <p class="lead">Добро пожаловать на демо библиотеку.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>
 
     <div class="body-content">
 
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-3">
+                <h2>Куда вы попали?</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                <p>Вы находитесь в электронной библиотеке. Данная электронная библиотека была написана в рамках
+                    практической работы по дисциплине «Базы данных» в СПбГЭТУ «ЛЭТИ»</p>
+                <p>Сайт работает только для ознакомительного характера. Гарантия сохранности данных отсутствует.</p>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
+            <div class="col-lg-3">
+                <h2>Разработчики</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+                <p>
+                    Данную работы сделала бригада из студентов группы 5301:
+                </p>
+                <ul>
+                    <li><a href="https://freelansim.ru/freelancers/Sadykh">Садыхов Садых</a></li>
+                    <li><a href="https://freelansim.ru/freelancers/EvgeniiDolenko">Доленко Евгений</a></li>
+                    <li>Манаков Денис</li>
+                </ul>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                <p>Исходный код доступен на <a href="https://github.com/Sadykh/eltech-database-library">Github</a></p>
+                <p>Принимаем ваши письма на адрес: <a href="mailto:me@sadykh.ru">me@sadykh.ru</a></p>
+
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            <div class="col-lg-5">
+                <h2>Donate</h2>
+                <p>Стипендии у нас нет. За любую безвозмездную помощь будем благодарны.</p>
+                <ul>
+                    <li><b>BTC:</b> <a href="https://chainz.cryptoid.info/btc/address.dws?347qwDtFqSepJV3D43q8bqW1XPPcKqFwn9.htm">347qwDtFqSepJV3D43q8bqW1XPPcKqFwn9</a></li>
+                    <li><b>ETH:</b> <a href="https://etherscan.io/address/0xd2b512d9fa83858bff218713f02f9fd17b630cd1">0xd2b512d9fa83858bff218713f02f9fd17b630cd1</a></li>
+                    <li><b>DASH:</b> <a href="https://chainz.cryptoid.info/dash/address.dws?7pYP4ZpmRCQvSJYRtVVwEK5GzkiK1qyAwH.htm">7pYP4ZpmRCQvSJYRtVVwEK5GzkiK1qyAwH</a></li>
+                    <li><b>LTC:</b> <a href="https://chainz.cryptoid.info/ltc/address.dws?LNYuhjMRPQWZxMuTKpHvepsmw42Pok3dTa.htm">LNYuhjMRPQWZxMuTKpHvepsmw42Pok3dTa</a></li>
+                </ul>
             </div>
         </div>
 

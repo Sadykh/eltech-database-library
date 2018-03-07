@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'Библиотека',
     'language' => 'ru-RU',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
