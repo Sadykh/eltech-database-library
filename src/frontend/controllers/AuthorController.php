@@ -2,17 +2,17 @@
 
 namespace frontend\controllers;
 
+use frontend\components\BaseAuthController;
 use Yii;
 use common\models\Author;
 use common\search\AuthorSeach;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * AuthorController implements the CRUD actions for Author model.
  */
-class AuthorController extends Controller
+class AuthorController extends BaseAuthController
 {
     /**
      * @inheritdoc

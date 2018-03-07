@@ -2,17 +2,17 @@
 
 namespace frontend\controllers;
 
+use frontend\components\BaseAuthController;
 use Yii;
 use common\models\Publication;
 use common\search\PublicationSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * PublicationController implements the CRUD actions for Publication model.
  */
-class PublicationController extends Controller
+class PublicationController extends BaseAuthController
 {
     /**
      * @inheritdoc

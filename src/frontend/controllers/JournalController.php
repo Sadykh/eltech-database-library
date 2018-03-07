@@ -2,17 +2,17 @@
 
 namespace frontend\controllers;
 
+use frontend\components\BaseAuthController;
 use Yii;
 use common\models\Journal;
 use common\search\Journal as JournalSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * JournalController implements the CRUD actions for Journal model.
  */
-class JournalController extends Controller
+class JournalController extends BaseAuthController
 {
     /**
      * @inheritdoc
