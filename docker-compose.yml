@@ -1,11 +1,11 @@
-version: '2'
+version: '3'
 
 services:
   web:
     container_name: eltech_library_nginx
     image: nginx:latest
     ports:
-      - "80:80"
+      - "1886:80"
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d/
       - ./nginx/logs:/var/log/nginx/
@@ -26,8 +26,6 @@ services:
     image: sadykh/mariadb-utf8:latest
     env_file:
       - .env
-    ports:
-      - "3306:3306"
     expose:
       - "3306"
     volumes:
