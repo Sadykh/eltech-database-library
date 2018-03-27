@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\helpers\PublicationHelper;
-
+use yii\web\JsExpression;
 /* @var $this yii\web\View */
 /* @var $model common\models\Publication */
 /* @var $form yii\widgets\ActiveForm */
@@ -23,10 +23,44 @@ use common\helpers\PublicationHelper;
     </div>
     <div class="row">
         <div class="col-md-3">
-            <?= $form->field($model, 'author_id')->dropDownList(PublicationHelper::getAuthorsList()) ?>
+            <?= $form->field($model, 'author_id')->widget(\kartik\select2\Select2::className(), [
+                'initValueText' => 'Выберите автора', // set the initial display text
+                'options' => ['placeholder' => 'Поиск автора'],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'language' => [
+                        'errorLoading' => new JsExpression("function () { return 'Поиск результатов...'; }"),
+                    ],
+                    'ajax' => [
+                        'url' => \yii\helpers\Url::to(['author']),
+                        'dataType' => 'json',
+                        'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                    ],
+                    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                    'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                    'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+                ],
+            ]);?>
         </div>
         <div class="col-md-3">
-            <?= $form->field($model, 'journal_id')->dropDownList(PublicationHelper::getJournalList()) ?>
+            <?= $form->field($model, 'journal_id')->widget(\kartik\select2\Select2::className(), [
+                'initValueText' => 'Выберите журнал', // set the initial display text
+                'options' => ['placeholder' => 'Поиск журнала'],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'language' => [
+                        'errorLoading' => new JsExpression("function () { return 'Поиск результатов...'; }"),
+                    ],
+                    'ajax' => [
+                        'url' => \yii\helpers\Url::to(['journal']),
+                        'dataType' => 'json',
+                        'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                    ],
+                    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                    'templateResult' => new JsExpression('function(city) { return city.text; }'),
+                    'templateSelection' => new JsExpression('function (city) { return city.text; }'),
+                ],
+            ]);?>
         </div>
     </div>
 

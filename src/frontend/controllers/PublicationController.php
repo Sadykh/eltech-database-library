@@ -2,10 +2,12 @@
 
 namespace frontend\controllers;
 
+use common\models\Author;
 use frontend\components\BaseAuthController;
 use Yii;
 use common\models\Publication;
 use common\search\PublicationSearch;
+use yii\db\Query;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -123,5 +125,51 @@ class PublicationController extends BaseAuthController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionAuthor($q = null)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query();
+            $query->select('id, firstName, lastName, middleName')
+                ->from('author')
+                ->where(['like', 'firstName', $q])
+                ->orWhere(['like', 'lastName', $q])
+                ->orWhere(['like', 'middleName', $q])
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            Yii::warning($data);
+            $result = [];
+            foreach ($data as $item) {
+                $result[] = ['id' => $item['id'], 'text' => $item['lastName'] . ' ' . $item['firstName'] . ' ' . $item['middleName']];
+            }
+            $out['results'] = $result;
+        }
+        return $out;
+    }
+
+    public function actionJournal($q = null)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query();
+            $query->select('id, title')
+                ->from('journal')
+                ->where(['like', 'title', $q])
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            Yii::warning($data);
+            $result = [];
+            foreach ($data as $item) {
+                $result[] = ['id' => $item['id'], 'text' => $item['title']];
+            }
+            $out['results'] = $result;
+        }
+        return $out;
     }
 }
