@@ -68,7 +68,7 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Главная', 'url' => ['/site/index']],
-        ['label' => 'Поиск', 'url' => ['/site/search']],
+        ['label' => 'Поиск', 'url' => ['/search/index']],
 
     ];
     if (Yii::$app->user->isGuest) {

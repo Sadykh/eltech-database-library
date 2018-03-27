@@ -76,15 +76,6 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    public function actionSearch() {
-        $searchModel = new PublicationSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('search', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
 
     /**
      * Logs in a user.

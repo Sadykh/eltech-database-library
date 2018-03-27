@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="publication-search">
 
         <?php $form = \yii\bootstrap\ActiveForm::begin([
-            'action' => ['search'],
+            'action' => ['index'],
             'method' => 'get',
         ]); ?>
 
