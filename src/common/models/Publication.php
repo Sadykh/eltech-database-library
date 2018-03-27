@@ -72,22 +72,24 @@ class Publication extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'author_id' => 'Author ID',
-            'language_id' => 'Language ID',
-            'journal_id' => 'Journal ID',
+            'user_id' => 'Создатель',
+            'author_id' => 'Автор',
+            'language_id' => 'Язык',
+            'journal_id' => 'Журнал',
             'scopus_id' => 'Scopus ID',
             'scopus_number' => 'Scopus Number',
             'doi_number' => 'DOI Number',
             'wos_id' => 'Wos ID',
             'rinch_id' => 'РИНЦ',
-            'peer_reviewed_id' => 'Peer Reviewed ID',
-            'conference_id' => 'Conference ID',
+            'peer_reviewed_id' => 'Только рецензируемые',
+            'conference_id' => 'Для конференций',
             'isbn' => 'Isbn',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'year' => 'Year',
             'title' => 'Title',
+            'year_from' => 'Год от',
+            'year_to' => 'Год до'
         ];
     }
 

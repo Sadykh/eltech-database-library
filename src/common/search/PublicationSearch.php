@@ -12,6 +12,8 @@ use common\models\Publication;
  */
 class PublicationSearch extends Publication
 {
+    public $year_from;
+    public $year_to;
     /**
      * @inheritdoc
      */
@@ -19,7 +21,7 @@ class PublicationSearch extends Publication
     {
         return [
             [['title'], 'string'],
-            [['id', 'user_id', 'author_id', 'language_id', 'year', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'user_id', 'author_id', 'language_id', 'year', 'year_from', 'year_to', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
             [['scopus_number', 'doi_number', 'isbn'], 'safe'],
         ];
     }
@@ -58,10 +60,18 @@ class PublicationSearch extends Publication
             return $dataProvider;
         }
 
+        if ($this->year_from) {
+            $query->andFilterWhere(['>', 'year', $this->year_from]);
+        }
+
+        if ($this->year_to) {
+            $query->andFilterWhere(['<', 'year', $this->year_to]);
+        }
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'user_id' => $this->user_id,
+//            'user_id' => $this->user_id,
             'author_id' => $this->author_id,
             'language_id' => $this->language_id,
             'year' => $this->year,
