@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Вы уверены, что хотите удалить данный журнал?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -30,10 +30,33 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'user_id',
-            'status_id',
-            'created_at',
-            'updated_at',
+            [
+                'attribute' => 'user_id',
+                'value' => function ($model) {
+                    return $model->user->username;
+                }
+            ],
+            [
+                'attribute' => 'status_id',
+                'value' => function ($model) {
+                    $statusList = \common\helpers\JournalHelper::getStatusList();
+                    return $statusList[$model->status_id];
+                }
+            ],
+            [
+                'attribute' => 'created_at',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return date('d.m.Y в h:i', $model->created_at);
+                }
+            ],
+            [
+                'attribute' => 'updated_at',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return date('d.m.Y в h:i', $model->created_at);
+                }
+            ],
         ],
     ]) ?>
 

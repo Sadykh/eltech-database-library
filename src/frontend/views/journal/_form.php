@@ -23,12 +23,17 @@ use common\helpers\JournalHelper;
         <div class="col-md-6">
             <?= $form->field($model, 'status_id')->dropDownList(JournalHelper::getStatusList()) ?>
         </div>
+        <div class="col-md-6">
+            <div class="alert alert-info" role="alert">
+                <p>Поле <b>Статус</b> влияет на наличие журнала в списке при добавлении публикации.</p>
+            </div>
+        </div>
     </div>
 
 
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

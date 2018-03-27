@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use common\helpers\JournalHelper;
+
 /* @var $this yii\web\View */
 /* @var $searchModel common\search\Journal */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -23,7 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            'id',
+            [
+                'attribute' => 'id',
+                'headerOptions' => ['width' => '10'],
+            ],
             'title',
             [
                 'attribute' => 'status_id',
@@ -32,7 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $statusList[$model->status_id];
                 }
             ],
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'headerOptions' => ['width' => '50'],
+            ],
         ],
     ]); ?>
 </div>
