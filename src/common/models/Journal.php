@@ -78,6 +78,14 @@ class Journal extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPublications()
+    {
+        return $this->hasMany(Publication::class, ['journal_id' => 'id']);
+    }
+
+    /**
      * @inheritdoc
      * @return \common\queries\JournalQuery the active query used by this AR class.
      */

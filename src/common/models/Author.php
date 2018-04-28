@@ -78,6 +78,22 @@ class Author extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPublicationAuthors()
+    {
+        return $this->hasMany(PublicationAuthor::className(), ['author_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPublications()
+    {
+        return $this->hasMany(Publication::className(), ['id' => 'publication_id'])->viaTable('publication_author', ['author_id' => 'id']);
+    }
+
+    /**
      * @inheritdoc
      * @return \common\queries\AuthorQuery the active query used by this AR class.
      */

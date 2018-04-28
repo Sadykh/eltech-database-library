@@ -34,6 +34,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'title',
             [
+                'attribute' => 'publication',
+                'label' => 'Публикаций',
+                'headerOptions' => ['width' => '10'],
+                'content' => function ($model) {
+                    return count($model->publications);
+                }
+            ],
+            [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update} {delete}',
                 'headerOptions' => ['width' => '20'],
