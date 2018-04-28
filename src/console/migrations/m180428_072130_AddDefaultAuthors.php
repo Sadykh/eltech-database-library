@@ -2,6 +2,8 @@
 
 use yii\db\Migration;
 use common\models\User;
+use common\models\Author;
+use common\models\AuthorAlias;
 
 /**
  * Class m180428_072130_AddDefaultAuthors
@@ -9,16 +11,16 @@ use common\models\User;
 class m180428_072130_AddDefaultAuthors extends Migration
 {
     public $authorList = [
-        'Бутусов Денис Николаевич',
-        'Андреев Валерий Сергеевич',
-        'Каримов Артур Искандарович',
-        'Каримов Тимур Искандарович',
-        'Красильников Александр Витальевич',
-        'Островский Валерий Юрьевич',
-        'Тутуева Александра Вадимовна',
-        'Горяинов Сергей Вадимович',
-        'Рыбин Вячеслав Геннадьевич',
-        'Копец Екатерина Евгеньевна​'
+        'Бутусов Денис Николаевич' => 'Butusov Denis Nikolaevich',
+        'Андреев Валерий Сергеевич' => 'Andreev Valery Sergeevich',
+        'Каримов Артур Искандарович' => 'Karimov Artur Iskandarovich',
+        'Каримов Тимур Искандарович' => 'Karimov Timur Iskandarovich',
+        'Красильников Александр Витальевич' => 'Krasilnikov Alexander Vitalievich',
+        'Островский Валерий Юрьевич' => 'Ostrovskii Valery Yurievich',
+        'Тутуева Александра Вадимовна' => 'Tutueva Alexandra Vadimovna',
+        'Горяинов Сергей Вадимович' => 'Goryainov Sergey Vadimovich',
+        'Рыбин Вячеслав Геннадьевич' => 'Rybin Vyacheslav Gennadievich',
+        'Копец Екатерина Евгеньевна​' => 'Kopets Ekaterina Evgenievna',
     ];
 
     /**
@@ -28,8 +30,8 @@ class m180428_072130_AddDefaultAuthors extends Migration
     {
         $user = User::findOne(['username' => 'Admin']);
 
-        foreach ($this->authorList as $item) {
-            $author = explode(' ', $item);
+        foreach ($this->authorList as $ruFullName => $enFullName) {
+            $author = explode(' ', $ruFullName);
             $this->insert('author', [
                 'lastName' => $author[0],
                 'firstName' => $author[1],
@@ -38,7 +40,17 @@ class m180428_072130_AddDefaultAuthors extends Migration
                 'created_at' => '1524899833',
                 'updated_at' => '1524899833',
             ]);
-
+            $author = Author::find()->byFullName($author[1], $author[0], $author[2])->one();
+            $authorAlias = explode(' ', $enFullName);
+            $this->insert('author_alias', [
+                'lastName' => $authorAlias[0],
+                'firstName' => $authorAlias[1],
+                'middleName' => $authorAlias[2],
+                'author_id' => $author->id,
+                'language_id' => AuthorAlias::LANG_EN,
+                'created_at' => '1524899833',
+                'updated_at' => '1524899833',
+            ]);
         }
     }
 
@@ -47,8 +59,8 @@ class m180428_072130_AddDefaultAuthors extends Migration
      */
     public function safeDown()
     {
-        foreach ($this->authorList as $item) {
-            $author = explode(' ', $item);
+        foreach ($this->authorList as $ruFullName => $item) {
+            $author = explode(' ', $ruFullName);
             $this->delete('author', [
                 'lastName' => $author[0],
                 'firstName' => $author[1],

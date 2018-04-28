@@ -80,9 +80,17 @@ class Author extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getAuthorAliases()
+    {
+        return $this->hasMany(AuthorAlias::class, ['author_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getPublicationAuthors()
     {
-        return $this->hasMany(PublicationAuthor::className(), ['author_id' => 'id']);
+        return $this->hasMany(PublicationAuthor::class, ['author_id' => 'id']);
     }
 
     /**

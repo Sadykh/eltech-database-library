@@ -14,6 +14,31 @@ class AuthorQuery extends \yii\db\ActiveQuery
         return $this->andWhere('[[status]]=1');
     }*/
 
+    /**
+     * Поиск по всему имени
+     * @param $firstName
+     * @param $lastName
+     * @param $middleName
+     * @return $this
+     */
+    public function byFullName($firstName, $lastName, $middleName)
+    {
+        return $this->andWhere([
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'middleName' => $middleName,
+        ]);
+    }
+
+    /**
+     * Поиск по фамилии
+     * @param $lastName
+     * @return $this
+     */
+    public function byLastName($lastName)
+    {
+        return $this->andWhere(['lastName' => $lastName]);
+    }
 
     /**
      * Поиск по Id
