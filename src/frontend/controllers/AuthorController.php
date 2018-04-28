@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
+use common\search\AuthorUserManagerSearch;
 use frontend\components\BaseAuthController;
 use Yii;
 use common\models\Author;
-use common\search\AuthorSeach;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -35,7 +35,7 @@ class AuthorController extends BaseAuthController
      */
     public function actionIndex()
     {
-        $searchModel = new AuthorSeach();
+        $searchModel = new AuthorUserManagerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -67,7 +67,7 @@ class AuthorController extends BaseAuthController
         $model = new Author();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -87,7 +87,7 @@ class AuthorController extends BaseAuthController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -95,13 +95,6 @@ class AuthorController extends BaseAuthController
         ]);
     }
 
-    /**
-     * Deletes an existing Author model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -118,7 +111,7 @@ class AuthorController extends BaseAuthController
      */
     protected function findModel($id)
     {
-        if (($model = Author::findOne($id)) !== null) {
+        if (($model = Author::find()->onlyOwner()->byId($id)->one()) !== null) {
             return $model;
         }
 

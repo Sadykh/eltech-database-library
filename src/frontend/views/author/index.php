@@ -14,15 +14,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="author-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+    <div class="alert alert-info" role="alert">
+        На данной странице указаны только авторы, которых вы добавили. Изменять или удалять авторов других
+        пользователей вы не имеете возможности.
+    </div>
     <p>
         <?= Html::a('Добавить автора', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             [
                 'attribute' => 'id',
@@ -32,16 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'lastName',
             'middleName',
             [
-                'attribute' => 'status_id',
-                'content' => function ($model) {
-                    $statusList = AuthorHelper::getStatusList();
-                    return $statusList[$model->status_id];
-                }
-            ],
-            //'created_at',
-            //'updated_at',
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+                'headerOptions' => ['width' => '20'],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ]
         ],
     ]); ?>
 </div>
