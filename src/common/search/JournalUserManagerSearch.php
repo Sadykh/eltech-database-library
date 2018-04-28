@@ -5,12 +5,12 @@ namespace common\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Journal as JournalModel;
+use common\models\Journal;
 
 /**
  * Journal represents the model behind the search form of `common\models\Journal`.
  */
-class Journal extends JournalModel
+class JournalUserManagerSearch extends Journal
 {
     /**
      * @inheritdoc
@@ -41,12 +41,12 @@ class Journal extends JournalModel
      */
     public function search($params)
     {
-        $query = JournalModel::find();
+        $query = Journal::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query' => $query->onlyOwner(),
         ]);
 
         $this->load($params);

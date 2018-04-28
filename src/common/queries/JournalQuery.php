@@ -15,6 +15,26 @@ class JournalQuery extends \yii\db\ActiveQuery
     }*/
 
     /**
+     * Поиск по Id
+     * @param $id
+     * @return $this
+     */
+    public function byId($id)
+    {
+        return $this->andWhere(['id' => $id]);
+    }
+
+    /**
+     * Только если ты владелец публикации
+     * @return $this
+     */
+    public function onlyOwner()
+    {
+        return $this->andWhere(['user_id' => \Yii::$app->user->id]);
+    }
+
+
+    /**
      * @inheritdoc
      * @return \common\models\Journal[]|array
      */

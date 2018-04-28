@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
+use common\search\JournalUserManagerSearch;
 use frontend\components\BaseAuthController;
 use Yii;
 use common\models\Journal;
-use common\search\Journal as JournalSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -35,7 +35,7 @@ class JournalController extends BaseAuthController
      */
     public function actionIndex()
     {
-        $searchModel = new JournalSearch();
+        $searchModel = new JournalUserManagerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -67,7 +67,7 @@ class JournalController extends BaseAuthController
         $model = new Journal();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
         Yii::warning($model->errors);
 
@@ -89,7 +89,7 @@ class JournalController extends BaseAuthController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -111,16 +111,15 @@ class JournalController extends BaseAuthController
         return $this->redirect(['index']);
     }
 
+
     /**
-     * Finds the Journal model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Journal the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return array|Journal|null
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {
-        if (($model = Journal::findOne($id)) !== null) {
+        if (($model = Journal::find()->onlyOwner()->byId($id)->one()) !== null) {
             return $model;
         }
 

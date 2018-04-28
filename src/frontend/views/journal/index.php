@@ -16,13 +16,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+    <div class="alert alert-info" role="alert">
+        На данной странице указаны только журналы, которые вы добавили. Изменять или удалять журналы других
+        пользователей вы не имеете возможности.
+    </div>
+
     <p>
         <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             [
                 'attribute' => 'id',
@@ -30,16 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'title',
             [
-                'attribute' => 'status_id',
-                'content' => function ($model) {
-                    $statusList = JournalHelper::getStatusList();
-                    return $statusList[$model->status_id];
-                }
-            ],
-            [
                 'class' => 'yii\grid\ActionColumn',
-                'headerOptions' => ['width' => '50'],
-            ],
+                'template' => '{update} {delete}',
+                'headerOptions' => ['width' => '20'],
+            ]
         ],
     ]); ?>
 </div>
