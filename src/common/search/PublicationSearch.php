@@ -2,6 +2,7 @@
 
 namespace common\search;
 
+use common\models\Author;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -14,6 +15,7 @@ class PublicationSearch extends Publication
 {
     public $year_from;
     public $year_to;
+
     /**
      * @inheritdoc
      */
@@ -23,7 +25,16 @@ class PublicationSearch extends Publication
             [['title'], 'string'],
             [['id', 'user_id', 'language_id', 'year', 'year_from', 'year_to', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
             [['scopus_number', 'doi_number', 'isbn'], 'safe'],
+            ['authorListId', 'safe'],
         ];
+    }
+
+    public function attributeLabels()
+    {
+        $labels = parent::attributeLabels();
+        $labels['year_from'] = 'Год от';
+        $labels['year_to'] = 'Год до';
+        return $labels;
     }
 
     /**
@@ -33,6 +44,19 @@ class PublicationSearch extends Publication
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthorListFullname()
+    {
+        $result = [];
+        $authors = Author::findAll(['id' => $this->authorListId]);
+        foreach ($authors as $author) {
+            $result[$author->id] = $author->lastName . ' ' . $author->firstName . ' ' . $author->middleName;
+        }
+        return $result;
     }
 
     /**
@@ -60,6 +84,13 @@ class PublicationSearch extends Publication
             return $dataProvider;
         }
 
+        if ($this->authorListId) {
+            $query->leftJoin('publication_author pa', 'pa.publication_id = publication.id')
+                ->where(['pa.author_id' => $this->authorListId])
+                ->groupBy(['publication.id'])
+                ->having('COUNT(pa.author_id) >=' . count($this->authorListId));
+        }
+
         if ($this->year_from) {
             $query->andFilterWhere(['>', 'year', $this->year_from]);
         }
@@ -68,21 +99,13 @@ class PublicationSearch extends Publication
             $query->andFilterWhere(['<', 'year', $this->year_to]);
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-//            'user_id' => $this->user_id,
-            'language_id' => $this->language_id,
-            'year' => $this->year,
-            'journal_id' => $this->journal_id,
-            'scopus_id' => $this->scopus_id,
-            'wos_id' => $this->wos_id,
-            'rinch_id' => $this->rinch_id,
-            'peer_reviewed_id' => $this->peer_reviewed_id,
-            'conference_id' => $this->conference_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+        $columnsForFilter = ['language_id', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id'];
+
+        foreach ($this->attributes as $attribute => $value) {
+            if (in_array($attribute, $columnsForFilter) && $value) {
+                $query->andFilterWhere([$attribute => $value]);
+            }
+        }
 
         $query->andFilterWhere(['like', 'scopus_number', $this->scopus_number])
             ->andFilterWhere(['like', 'doi_number', $this->doi_number])
