@@ -32,11 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'id',
                 'headerOptions' => ['width' => '10'],
             ],
-            'title',
+            [
+                'attribute' => 'title',
+                'content' => function ($model) {
+                    $dots = strlen($model->title) > 125 ?  '...' : '';
+                    return mb_substr($model->title, 0, 125) . $dots;
+                }],
             [
                 'attribute' => 'publication',
                 'label' => 'Публикаций',
-                'headerOptions' => ['width' => '10'],
+                'headerOptions' => ['max-width' => '10'],
                 'content' => function ($model) {
                     return count($model->publications);
                 }

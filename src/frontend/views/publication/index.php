@@ -28,7 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'columns' => [
             'id',
-            'title',
+            [
+                'attribute' => 'title',
+                'content' => function ($model) {
+                    $dots = strlen($model->title) > 30 ? '...' : '';
+                    return mb_substr($model->title, 0, 30) . $dots;
+                }
+            ],
             'year',
             [
                 'attribute' => 'language_id',
@@ -46,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                      * @var $author \common\models\Author
                      */
                     foreach ($model->authors as $author) {
-                        $result[] = $author->getFullName();
+                        $result[] = $author->getShortFullName();
                     }
                     return implode(', ', $result);
                 }
@@ -54,8 +60,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'journal_id',
                 'content' => function ($model) {
-                    $statusList = PublicationHelper::getJournalList();
-                    return $statusList[$model->journal_id];
+                    $journalList = PublicationHelper::getJournalList();
+                    $journalTitle = $journalList[$model->journal_id];
+                    $dots = strlen($journalTitle) > 30 ? '...' : '';
+                    return mb_substr($journalTitle, 0, 30) . $dots;
                 }
             ],
             [

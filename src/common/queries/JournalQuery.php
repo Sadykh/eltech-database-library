@@ -15,6 +15,16 @@ class JournalQuery extends \yii\db\ActiveQuery
     }*/
 
     /**
+     * Поиск по названию
+     * @param $title
+     * @return $this
+     */
+    public function byTitle($title)
+    {
+        return $this->andWhere(['title' => $title]);
+    }
+
+    /**
      * Поиск по Id
      * @param $id
      * @return $this

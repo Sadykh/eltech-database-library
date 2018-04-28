@@ -123,5 +123,12 @@ class Author extends \yii\db\ActiveRecord
         return $this->firstName . ' ' . $this->lastName . ' ' . $this->middleName;
     }
 
+    public function getShortFullName()
+    {
+        return $this->lastName  . ' ' . mb_substr($this->firstName, 0, 1) . '. ' . mb_substr($this->middleName, 0, 1) . '.';
+    }
+
+
+
 
 }

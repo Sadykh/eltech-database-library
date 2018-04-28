@@ -37,6 +37,8 @@ class Publication extends \yii\db\ActiveRecord
 
     protected $authorListId;
 
+    const LANG_RU = 1;
+    const LANG_EN = 2;
 
     /**
      * @inheritdoc
