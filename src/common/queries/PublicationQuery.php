@@ -9,10 +9,25 @@ namespace common\queries;
  */
 class PublicationQuery extends \yii\db\ActiveQuery
 {
-    /*public function active()
+
+    /**
+     * Поиск по Id
+     * @param $id
+     * @return $this
+     */
+    public function byId($id)
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->andWhere(['id' => $id]);
+    }
+
+    /**
+     * Только если ты владелец публикации
+     * @return $this
+     */
+    public function onlyOwner()
+    {
+        return $this->andWhere(['user_id' => \Yii::$app->user->id]);
+    }
 
     /**
      * @inheritdoc

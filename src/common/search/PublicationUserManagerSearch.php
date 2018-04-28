@@ -10,7 +10,7 @@ use common\models\Publication;
 /**
  * PublicationSearch represents the model behind the search form of `common\models\Publication`.
  */
-class PublicationSearch extends Publication
+class PublicationUserManagerSearch extends Publication
 {
     public $year_from;
     public $year_to;
@@ -49,7 +49,7 @@ class PublicationSearch extends Publication
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query' => $query->onlyOwner(),
         ]);
 
         $this->load($params);

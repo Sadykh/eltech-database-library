@@ -28,7 +28,7 @@ class PublicationHelper
     public static function getAgeList()
     {
         $result = [];
-        for ($i = 2018; $i > 1950; $i--) {
+        for ($i = 2018; $i > 2010; $i--) {
             $result[$i] = $i;
         }
         return $result;

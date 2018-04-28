@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Author;
+use common\search\PublicationUserManagerSearch;
 use frontend\components\BaseAuthController;
 use Yii;
 use common\models\Publication;
@@ -37,7 +38,7 @@ class PublicationController extends BaseAuthController
      */
     public function actionIndex()
     {
-        $searchModel = new PublicationSearch();
+        $searchModel = new PublicationUserManagerSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -69,7 +70,7 @@ class PublicationController extends BaseAuthController
         $model = new Publication();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -89,7 +90,7 @@ class PublicationController extends BaseAuthController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -97,13 +98,6 @@ class PublicationController extends BaseAuthController
         ]);
     }
 
-    /**
-     * Deletes an existing Publication model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -112,15 +106,13 @@ class PublicationController extends BaseAuthController
     }
 
     /**
-     * Finds the Publication model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Publication the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @param $id
+     * @return array|Publication|null
+     * @throws NotFoundHttpException
      */
     protected function findModel($id)
     {
-        if (($model = Publication::findOne($id)) !== null) {
+        if (($model = Publication::find()->onlyOwner()->byId($id)->one()) !== null) {
             return $model;
         }
 
