@@ -26,6 +26,9 @@ class PublicationQuery extends \yii\db\ActiveQuery
      */
     public function onlyOwner()
     {
+        if(\Yii::$app->user->identity->username == 'Admin') {
+            return $this;
+        }
         return $this->andWhere(['user_id' => \Yii::$app->user->id]);
     }
 
