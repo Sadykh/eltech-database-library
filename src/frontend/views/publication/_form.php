@@ -109,7 +109,11 @@ use yii\web\JsExpression;
     <div class="row">
         <div class="col-md-3">
             <?= $form->field($model, 'file')->fileInput() ?>
-            <?php var_dump($model->errors)?>
+        </div>
+        <div class="col-md-3">
+            <?php if ($model->file_exist) {
+                echo 'Файл доступен по ' . Html::a('ссылке', $model->getFileOnWeb());
+            } ?>
         </div>
     </div>
 
