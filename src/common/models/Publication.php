@@ -235,4 +235,9 @@ class Publication extends \yii\db\ActiveRecord
     {
         return $this->id . '.pdf';
     }
+
+    public function getFileOnWeb()
+    {
+        return $this->getDir() . $this->getFileName();
+    }
 }
