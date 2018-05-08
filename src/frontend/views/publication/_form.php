@@ -12,7 +12,7 @@ use yii\web\JsExpression;
 
 <div class="publication-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
     <div class="row">
         <div class="col-md-3">
@@ -107,8 +107,10 @@ use yii\web\JsExpression;
         </div>
     </div>
     <div class="row">
-
-
+        <div class="col-md-3">
+            <?= $form->field($model, 'file')->fileInput() ?>
+            <?php var_dump($model->errors)?>
+        </div>
     </div>
 
 
