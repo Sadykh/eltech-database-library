@@ -9,6 +9,7 @@ use Yii;
 use common\models\Publication;
 use common\search\PublicationSearch;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -123,21 +124,32 @@ class PublicationController extends BaseAuthController
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+    private function getAuthorFindQuery($q, $table)
+    {
+        $query = new Query();
+
+        if ($table == 'author') {
+            $query->select('id, firstName, lastName, middleName');
+        } else {
+            $query->select('author_alias.author_id AS id, firstName, lastName, middleName, author_id');
+        }
+        $query->from($table)
+            ->where(['like', 'firstName', $q])
+            ->orWhere(['like', 'lastName', $q])
+            ->orWhere(['like', 'middleName', $q])
+            ->limit(20);
+        $command = $query->createCommand();
+        return $command->queryAll();
+    }
+
     public function actionAuthor($q = null)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $out = ['results' => ['id' => '', 'text' => '']];
         if (!is_null($q)) {
-            $query = new Query();
-            $query->select('id, firstName, lastName, middleName')
-                ->from('author')
-                ->where(['like', 'firstName', $q])
-                ->orWhere(['like', 'lastName', $q])
-                ->orWhere(['like', 'middleName', $q])
-                ->limit(20);
-            $command = $query->createCommand();
-            $data = $command->queryAll();
-            Yii::warning($data);
+            $data = $this->getAuthorFindQuery($q, 'author');
+            $dataAlias = $this->getAuthorFindQuery($q, 'author_alias');
+            $data = ArrayHelper::merge($data, $dataAlias);
             $result = [];
             foreach ($data as $item) {
                 $result[] = ['id' => $item['id'], 'text' => $item['lastName'] . ' ' . $item['firstName'] . ' ' . $item['middleName']];
