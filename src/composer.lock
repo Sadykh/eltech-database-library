@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fdf00ffd2741172e27e43533af027f2",
+    "content-hash": "ad9df3ed6df60218a31b6074bf52e74b",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -166,6 +166,47 @@
                 "markdown-extra"
             ],
             "time": "2017-07-16T21:13:23+00:00"
+        },
+        {
+            "name": "dastanaron/yii2-translit",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dastanaron/yii2-translit.git",
+                "reference": "635737e01a2abd047c86e1e95c4b042b3f1c1846"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dastanaron/yii2-translit/zipball/635737e01a2abd047c86e1e95c4b042b3f1c1846",
+                "reference": "635737e01a2abd047c86e1e95c4b042b3f1c1846",
+                "shasum": ""
+            },
+            "type": "extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dastanaron\\translit\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "dastanaron",
+                    "email": "flow199@yandex.ru"
+                }
+            ],
+            "description": "Transliteration symbols rus-en and en-rus",
+            "keywords": [
+                "extension"
+            ],
+            "time": "2017-10-12T09:28:48+00:00"
         },
         {
             "name": "doctrine/lexer",

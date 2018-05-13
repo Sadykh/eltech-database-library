@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use dastanaron\translit\Translit;
 
 /**
  * @var $model \common\models\Publication
@@ -17,7 +18,12 @@ use yii\helpers\Html;
             $authorsList[$author->id] .= mb_substr($author->middleName, 0, 1) . '.';
         }
     }
-    $textLink = implode(', ', $authorsList);
+    $authorText = implode(', ', $authorsList);
+    if ($model->language_id == \common\models\Publication::LANG_EN) {
+        $translit = new Translit();
+        $authorText = $translit->translit($authorText, false, 'ru-en');
+    }
+    $textLink = $authorText;
     $textLink .= ' ' . $model->title . ' ';
     $textLink .= '// ' . $model->journal->title . ' ';
     $textLink .= $model->year . '. ';
