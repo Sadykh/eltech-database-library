@@ -24,6 +24,7 @@ class JournalController extends BaseAuthController
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'delete-post' => ['POST'],
                 ],
             ],
         ];
@@ -97,17 +98,23 @@ class JournalController extends BaseAuthController
         ]);
     }
 
-    /**
-     * Deletes an existing Journal model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $data = $this->findModel($id);
 
+        if (!count($data->publications)) {
+            $data->delete();
+            return $this->redirect(['index']);
+        }
+        return $this->render('prepare_delete', [
+            'data' => $data,
+        ]);
+    }
+
+    public function actionDeletePost($id)
+    {
+        $data = $this->findModel($id);
+        $data->delete();
         return $this->redirect(['index']);
     }
 
