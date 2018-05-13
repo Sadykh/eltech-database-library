@@ -56,7 +56,7 @@ class Publication extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['language_id', 'journal_id', 'authorListId'], 'required'],
+            [['language_id', 'authorListId'], 'required'],
             [['user_id', 'language_id', 'year', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at', 'file_exist'], 'integer'],
             [['scopus_number', 'doi_number', 'isbn', 'title'], 'string', 'max' => 191],
             [['journal_id'], 'exist', 'skipOnError' => true, 'targetClass' => Journal::class, 'targetAttribute' => ['journal_id' => 'id']],
