@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "author_alias".
@@ -44,6 +45,13 @@ class AuthorAlias extends \yii\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -51,13 +59,15 @@ class AuthorAlias extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'author_id' => 'Author ID',
-            'firstName' => 'First Name',
-            'lastName' => 'Last Name',
-            'middleName' => 'Middle Name',
-            'language_id' => 'Language ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'author_id' => 'Изначальный автор',
+            'firstName' => 'Имя',
+            'lastName' => 'Фамилия',
+            'middleName' => 'Отчество',
+            'user_id' => 'Добавил',
+            'status_id' => 'Статус',
+            'created_at' => 'Дата добавления',
+            'updated_at' => 'Дата обновления',
+            'language_id' => 'Язык',
         ];
     }
 

@@ -8,7 +8,7 @@ use yii\grid\GridView;
 /* @var $searchModel common\search\AuthorSeach */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Авторы';
+$this->title = 'Авторы (псевдонимы)';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="author-index">
@@ -33,21 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'firstName',
             'lastName',
             'middleName',
-            [
-                'attribute' => 'publication',
-                'label' => 'Публикаций',
-                'headerOptions' => ['width' => '10'],
-                'content' => function ($model) {
-                    return count($model->publications);
-                }
-            ],
-            [
-                'label' => 'Псевдонимов',
-                'headerOptions' => ['width' => '10'],
-                'content' => function ($model) {
-                    return Html::a(count($model->authorAliases), ['/author-alias/index', 'author_id' => $model->id]);
-                }
-            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{update} {delete}',
