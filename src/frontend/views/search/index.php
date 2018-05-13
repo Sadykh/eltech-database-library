@@ -111,6 +111,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($searchModel, 'peer_reviewed_id')->checkbox() ?>
             </div>
         </div>
+        <div class="row">
+
+            <div class="col-md-3">
+                <?= $form->field($searchModel, 'displayDoi')->checkbox() ?>
+            </div>
+            <div class="col-md-3">
+                <?= $form->field($searchModel, 'displayScopus')->checkbox() ?>
+            </div>
+
+            <div class="col-md-3">
+                <?= $form->field($searchModel, 'displayIsbn')->checkbox() ?>
+            </div>
+        </div>
 
 
         <div class="form-group">
@@ -126,6 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= \yii\widgets\ListView::widget([
             'dataProvider' => $dataProvider,
             'itemView' => '_search_item',
+            'viewParams' => ['searchModel' => $searchModel],
         ]); ?>
     </ul>
 </div>

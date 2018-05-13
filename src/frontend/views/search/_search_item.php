@@ -5,6 +5,7 @@ use dastanaron\translit\Translit;
 
 /**
  * @var $model \common\models\Publication
+ * @var $searchModel \common\search\PublicationSearch
  */
 
 ?>
@@ -38,13 +39,13 @@ use dastanaron\translit\Translit;
         $textLink .= implode($publisherData, ', ') . ', ';
     }
     $textLink .= $model->year . 'г. ';
-    if ($model->doi_number) {
+    if ($model->doi_number && $searchModel->displayDoi) {
         $extraData[] = 'DOI: ' . $model->doi_number;
     }
-    if ($model->scopus_number) {
+    if ($model->scopus_number && $searchModel->displayScopus) {
         $extraData[] = 'Scopus ID: ' . $model->scopus_number;
     }
-    if ($model->isbn) {
+    if ($model->isbn && $searchModel->displayIsbn) {
         $extraData[] = 'ISBN: ' . $model->isbn;
     }
 

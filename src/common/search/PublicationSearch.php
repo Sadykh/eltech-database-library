@@ -16,6 +16,10 @@ class PublicationSearch extends Publication
     public $year_from;
     public $year_to;
 
+    public $displayDoi = 0;
+    public $displayScopus = 0;
+    public $displayIsbn = 0;
+
     /**
      * @inheritdoc
      */
@@ -26,6 +30,7 @@ class PublicationSearch extends Publication
             [['id', 'user_id', 'language_id', 'year', 'year_from', 'year_to', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at'], 'integer'],
             [['scopus_number', 'doi_number', 'isbn'], 'safe'],
             ['authorListId', 'safe'],
+            [['displayDoi', 'displayScopus', 'displayIsbn'], 'integer']
         ];
     }
 
@@ -34,6 +39,9 @@ class PublicationSearch extends Publication
         $labels = parent::attributeLabels();
         $labels['year_from'] = 'Год от';
         $labels['year_to'] = 'Год до';
+        $labels['displayDoi'] = 'Показать DOI';
+        $labels['displayScopus'] = 'Показать Scopus ID';
+        $labels['displayIsbn'] = 'Показать ISBN';
         return $labels;
     }
 
