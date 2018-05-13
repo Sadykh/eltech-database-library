@@ -91,11 +91,11 @@ use yii\web\JsExpression;
 
     <div class="row">
         <div class="col-md-3">
-            <?= $form->field($model, 'publisher')->textInput(['maxlength' => true]) ?>
-        </div>
-        <div class="col-md-2">
             <?= $form->field($model, 'publisher_name')->textInput(['maxlength' => true]) ?>
 
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($model, 'publisher')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-2">
             <?= $form->field($model, 'publisher_number')->textInput(['maxlength' => true]) ?>

@@ -58,12 +58,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'attribute' => 'journal_id',
+                'attribute' => 'publisher_name',
                 'content' => function ($model) {
-                    $journalList = PublicationHelper::getJournalList();
-                    $journalTitle = $journalList[$model->journal_id];
-                    $dots = strlen($journalTitle) > 30 ? '...' : '';
-                    return mb_substr($journalTitle, 0, 30) . $dots;
+                    $dots = strlen($model->publisher_name) > 30 ? '...' : '';
+                    return mb_substr($model->publisher_name, 0, 30) . $dots;
                 }
             ],
             [
