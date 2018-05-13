@@ -92,11 +92,11 @@ class PublicationSearch extends Publication
         }
 
         if ($this->year_from) {
-            $query->andFilterWhere(['>', 'year', $this->year_from]);
+            $query->andFilterWhere(['>=', 'year', $this->year_from]);
         }
 
         if ($this->year_to) {
-            $query->andFilterWhere(['<', 'year', $this->year_to]);
+            $query->andFilterWhere(['<=', 'year', $this->year_to]);
         }
 
         $columnsForFilter = ['language_id', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id'];
