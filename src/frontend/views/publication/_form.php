@@ -42,9 +42,12 @@ use yii\web\JsExpression;
                 ],
             ]); ?>
         </div>
+        <div class="col-md-3" style="margin-top: 30px">
+            <?= $form->field($model, 'rinch_id')->checkbox() ?>
+        </div>
     </div>
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <?= $form->field($model, 'authorListId')->widget(\kartik\select2\Select2::class, [
                 'initValueText' => 'Выберите автора', // set the initial display text
                 'options' => ['placeholder' => 'Поиск автора', 'multiple' => true],
@@ -81,6 +84,28 @@ use yii\web\JsExpression;
         <div class="col-md-3">
             <?= $form->field($model, 'doi_number')->textInput(['maxlength' => true]) ?>
         </div>
+        <div class="col-md-3" style="margin-top: 30px">
+            <?= $form->field($model, 'wos_id')->checkbox() ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <?= $form->field($model, 'publisher')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($model, 'publisher_name')->textInput(['maxlength' => true]) ?>
+
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($model, 'publisher_number')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($model, 'publisher_pages')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-md-3">
+            <?= $form->field($model, 'publisher_city')->textInput(['maxlength' => true]) ?>
+        </div>
     </div>
 
     <div class="row">
@@ -90,22 +115,14 @@ use yii\web\JsExpression;
         <div class="col-md-3">
             <?= $form->field($model, 'scopus_number')->textInput(['maxlength' => true]) ?>
         </div>
-        <div class="col-md-3" style="margin-top: 25px">
-            <?= $form->field($model, 'wos_id')->checkbox() ?>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            <?= $form->field($model, 'rinch_id')->checkbox() ?>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-3" style="margin-top: 30px">
             <?= $form->field($model, 'peer_reviewed_id')->checkbox() ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3" style="margin-top: 30px">
             <?= $form->field($model, 'conference_id')->checkbox() ?>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-3">
             <?= $form->field($model, 'file')->fileInput() ?>

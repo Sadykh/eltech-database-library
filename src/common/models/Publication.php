@@ -27,10 +27,17 @@ use yii\web\UploadedFile;
  * @property int $updated_at
  * @property string $title
  * @property int $file_exist
+ * @property string $publisher
+ * @property string $publisher_name
+ * @property string $publisher_number
+ * @property string $publisher_pages
+ * @property string $publisher_city
  *
- * @property Author $author
+ *
  * @property Journal $journal
  * @property User $user
+ * @property PublicationAuthor[] $publicationAuthors
+ * @property Author[] $authors
  */
 class Publication extends \yii\db\ActiveRecord
 {
@@ -58,7 +65,7 @@ class Publication extends \yii\db\ActiveRecord
         return [
             [['language_id', 'authorListId'], 'required'],
             [['user_id', 'language_id', 'year', 'journal_id', 'scopus_id', 'wos_id', 'rinch_id', 'peer_reviewed_id', 'conference_id', 'created_at', 'updated_at', 'file_exist'], 'integer'],
-            [['scopus_number', 'doi_number', 'isbn', 'title'], 'string', 'max' => 191],
+            [['scopus_number', 'doi_number', 'isbn', 'title', 'publisher', 'publisher_name', 'publisher_number', 'publisher_pages', 'publisher_city'], 'string', 'max' => 191],
             [['journal_id'], 'exist', 'skipOnError' => true, 'targetClass' => Journal::class, 'targetAttribute' => ['journal_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             ['authorListId', 'safe'],
@@ -98,7 +105,12 @@ class Publication extends \yii\db\ActiveRecord
             'title' => 'Название публикации',
             'authorListId' => 'Список авторов',
             'file_exist' => 'File Exist',
-            'file' => 'Файл'
+            'file' => 'Файл',
+            'publisher' => 'Издатель',
+            'publisher_name' => 'Название издания',
+            'publisher_number' => 'Номер издания',
+            'publisher_pages' => 'Номера страниц',
+            'publisher_city' => 'Город издания',
         ];
     }
 
@@ -239,5 +251,30 @@ class Publication extends \yii\db\ActiveRecord
     public function getFileOnWeb()
     {
         return $this->getDir() . $this->getFileName();
+    }
+
+    public function getPublisher_name()
+    {
+        return $this->publisher_name;;
+    }
+
+    public function getPublisher()
+    {
+        return $this->publisher ? 'изд. ' . $this->publisher : null;
+    }
+
+    public function getPublisher_number()
+    {
+        return $this->publisher_number;
+    }
+
+    public function getPublisher_pages()
+    {
+        return $this->publisher_pages ? 'c.' . $this->publisher_pages : null;
+    }
+
+    public function getPublisher_city()
+    {
+        return $this->publisher_city ? 'г.' . $this->publisher_city : null;
     }
 }

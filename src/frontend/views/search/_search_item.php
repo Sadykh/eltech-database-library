@@ -10,6 +10,9 @@ use dastanaron\translit\Translit;
 ?>
 <li>
     <?php
+    $extraData = [];
+    $publisherData = [];
+    $publisherFields = ['getPublisher_name', 'getPublisher', 'getPublisher_number', 'getPublisher_pages', 'getPublisher_city'];
     $textLink = '';
     $authorsList = [];
     foreach ($model->authors as $author) {
@@ -24,11 +27,29 @@ use dastanaron\translit\Translit;
         $authorText = $translit->translit($authorText, false, 'ru-en');
     }
     $textLink = $authorText;
-    $textLink .= ' ' . $model->title . ' ';
-    $textLink .= '// ' . $model->journal->title . ' ';
-    $textLink .= $model->year . '. ';
+    $textLink .= ' ' . $model->title . ' // ';
+
+    foreach ($publisherFields as $publisherField) {
+        if ($model->{$publisherField}()) {
+            $publisherData[] = $model->{$publisherField}();
+        }
+    }
+    if (count($publisherData)) {
+        $textLink .= implode($publisherData, ', ') . ', ';
+    }
+    $textLink .= $model->year . 'г. ';
     if ($model->doi_number) {
-        $textLink .= '(DOI ' . $model->doi_number . ')';
+        $extraData[] = 'DOI: ' . $model->doi_number;
+    }
+    if ($model->scopus_number) {
+        $extraData[] = 'Scopus ID: ' . $model->scopus_number;
+    }
+    if ($model->isbn) {
+        $extraData[] = 'ISBN: ' . $model->isbn;
+    }
+
+    if (count($extraData)) {
+        $textLink .= '(' . implode($extraData, ', ') . ')';
     }
 
     if ($model->file_exist) {
