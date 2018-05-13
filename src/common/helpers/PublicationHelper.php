@@ -4,6 +4,7 @@ namespace common\helpers;
 
 use common\models\Author;
 use common\models\Journal;
+use common\models\Publication;
 use yii\helpers\ArrayHelper;
 
 class PublicationHelper
@@ -42,6 +43,12 @@ class PublicationHelper
             $result[$item->id] = $item->lastName . ' ' . $item->firstName . ' ' . $item->middleName;
         }
         return $result;
+    }
+
+    public static function getPublisherNames()
+    {
+        $model = Publication::find()->all();
+        return ArrayHelper::map($model, 'publisher_name', 'publisher_name');
     }
 
     public static function getJournalList()

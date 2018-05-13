@@ -59,8 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-md-3">
                 <?= $form->field($searchModel, 'journal_id')->dropDownList(ArrayHelper::merge([null => 'Все'], PublicationHelper::getJournalList())) ?>
             </div>
-            <div class="col-md-3" style="margin-top: 20px">
-                <?= $form->field($searchModel, 'peer_reviewed_id')->checkbox() ?>
+
+            <div class="col-md-3">
+                <?= $form->field($searchModel, 'publisher_name')->dropDownList(ArrayHelper::merge([null => 'Все'], PublicationHelper::getPublisherNames())) ?>
             </div>
         </div>
 
@@ -104,6 +105,10 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="col-md-3">
                 <?= $form->field($searchModel, 'conference_id')->checkbox() ?>
+            </div>
+
+            <div class="col-md-3">
+                <?= $form->field($searchModel, 'peer_reviewed_id')->checkbox() ?>
             </div>
         </div>
 
