@@ -71,7 +71,6 @@ class PublicationUserManagerSearch extends Publication
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-//            'user_id' => $this->user_id,
             'language_id' => $this->language_id,
             'year' => $this->year,
             'journal_id' => $this->journal_id,
@@ -83,6 +82,8 @@ class PublicationUserManagerSearch extends Publication
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
+
+        $query->orderBy(['id' => SORT_DESC]);
 
         $query->andFilterWhere(['like', 'scopus_number', $this->scopus_number])
             ->andFilterWhere(['like', 'doi_number', $this->doi_number])

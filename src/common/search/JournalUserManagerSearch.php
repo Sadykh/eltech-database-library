@@ -57,7 +57,8 @@ class JournalUserManagerSearch extends Journal
             return $dataProvider;
         }
 
-        // grid filtering conditions
+        $query->orderBy(['id' => SORT_DESC]);
+
         $query->andFilterWhere([
             'id' => $this->id,
             'status_id' => $this->status_id,
