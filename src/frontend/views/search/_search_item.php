@@ -30,17 +30,16 @@ use dastanaron\translit\Translit;
     $textLink = $authorText;
     $textLink .= ' ' . $model->title . ' // ';
 
-    if (count($publisherData)) {
-        $textLink .= implode($publisherData, ', ') . ', ';
-    }
+    $textLink .= $model->getYear();
 
     foreach ($publisherFields as $publisherField) {
         if ($model->{$publisherField}()) {
             $publisherData[] = $model->{$publisherField}();
         }
     }
-
-    $textLink .= $model->getYear();
+    if (count($publisherData)) {
+        $textLink .= implode($publisherData, ', ') . ', ';
+    }
     if ($model->doi_number && $searchModel->displayDoi) {
         $extraData[] = 'DOI: ' . $model->doi_number;
     }
