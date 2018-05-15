@@ -282,4 +282,9 @@ class Publication extends \yii\db\ActiveRecord
 
         return $this->publisher_city ? $extra . $this->publisher_city : null;
     }
+
+    public function getYear() {
+        $extra = $this->language_id == self::LANG_RU ? 'г. ' : '';
+        return $this->year . $extra;
+    }
 }

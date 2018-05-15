@@ -38,7 +38,7 @@ use dastanaron\translit\Translit;
     if (count($publisherData)) {
         $textLink .= implode($publisherData, ', ') . ', ';
     }
-    $textLink .= $model->year . 'г. ';
+    $textLink .= $model->getYear();
     if ($model->doi_number && $searchModel->displayDoi) {
         $extraData[] = 'DOI: ' . $model->doi_number;
     }
