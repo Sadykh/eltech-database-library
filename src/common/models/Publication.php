@@ -260,8 +260,7 @@ class Publication extends \yii\db\ActiveRecord
 
     public function getPublisher()
     {
-        $extra = $this->language_id == self::LANG_RU ? 'изд. ' : '';
-        return $this->publisher ? $extra . $this->publisher : null;
+        return $this->publisher ? $this->publisher : null;
     }
 
     public function getPublisher_number()
@@ -271,7 +270,7 @@ class Publication extends \yii\db\ActiveRecord
 
     public function getPublisher_pages()
     {
-        $extra = $this->language_id == self::LANG_RU ? 'c.' : '';
+        $extra = $this->language_id == self::LANG_RU ? 'c.' : 'p.';
 
         return $this->publisher_pages ? $extra . $this->publisher_pages : null;
     }
