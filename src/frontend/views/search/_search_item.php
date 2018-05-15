@@ -13,7 +13,7 @@ use dastanaron\translit\Translit;
     <?php
     $extraData = [];
     $publisherData = [];
-    $publisherFields = ['getPublisher_name', 'getPublisher', 'getPublisher_number', 'getPublisher_pages', 'getPublisher_city'];
+    $publisherFields = ['getPublisher_name', 'getPublisher', 'getPublisher_number', 'getYear', 'getPublisher_pages', 'getPublisher_city'];
     $textLink = '';
     $authorsList = [];
     foreach ($model->authors as $author) {
@@ -29,8 +29,6 @@ use dastanaron\translit\Translit;
     }
     $textLink = $authorText;
     $textLink .= ' ' . $model->title . ' // ';
-
-    $textLink .= $model->getYear();
 
     foreach ($publisherFields as $publisherField) {
         if ($model->{$publisherField}()) {
