@@ -13,7 +13,7 @@ use dastanaron\translit\Translit;
     <?php
     $extraData = [];
     $publisherData = [];
-    $publisherFields = ['getPublisher_name', 'getPublisher', 'getPublisher_number', 'getYear', 'getPublisher_pages', 'getPublisher_city'];
+    $publisherFields = ['getPublisher_name', 'getPublisher', 'getPublisher_number', 'getPublisher_city', 'getYear', 'getPublisher_pages'];
     $textLink = '';
     $authorsList = [];
     foreach ($model->authors as $author) {
