@@ -272,7 +272,7 @@ class Publication extends \yii\db\ActiveRecord
     {
         $extra = $this->language_id == self::LANG_RU ? 'c.' : 'p.';
 
-        return $this->publisher_pages ? $this->publisher_pages . $extra : null;
+        return $this->publisher_pages ? $extra . $this->publisher_pages: null;
     }
 
     public function getPublisher_city()
