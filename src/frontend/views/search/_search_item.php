@@ -36,7 +36,7 @@ use dastanaron\translit\Translit;
         }
     }
     if (count($publisherData)) {
-        $textLink .= implode($publisherData, ', ') . ', ';
+        $textLink .= implode($publisherData, ', ');
     }
     if ($model->doi_number && $searchModel->displayDoi) {
         $extraData[] = 'DOI: ' . $model->doi_number;
