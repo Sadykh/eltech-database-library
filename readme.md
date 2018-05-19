@@ -25,6 +25,8 @@ php init
 6. Выполняем следующую команду для применения миграций базы данных:
 ```bash
 php yii migrate
+php yii util/add-publication
+php yii util/transfer-journals
 ```
 4. Далее в файле hosts (пути в Windows и Linux могут различаться) нужно добавить запись:
 ```
